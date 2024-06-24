@@ -78,6 +78,8 @@ namespace AstolfoBeanPlushie
         private void Mod_Load()
         {
             var assetBundle = AssetBundle.CreateFromMemoryImmediate(Resource1.astolfoplushie);
+            _plushiePrefab = assetBundle.LoadAsset<GameObject>("Astolfo");
+            assetBundle.Unload(false);
 
             var player = GameObject.Find("PLAYER");
 
@@ -101,7 +103,6 @@ namespace AstolfoBeanPlushie
                 SaveLoad.DeleteValue(this, "plushieRot");
             }
 
-            assetBundle.Unload(false);
         }
 
         private void Mod_OnSave()
