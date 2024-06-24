@@ -74,6 +74,7 @@ namespace AstolfoBeanPlushie
             _plushie.name = "Astolfo Plushie(Clone)";
             _plushie.transform.position = pos;
             _plushie.transform.rotation = rot;
+            _plushies.Add(_plushie);
             return _plushie;
         }
 
