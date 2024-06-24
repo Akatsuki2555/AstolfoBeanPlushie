@@ -20,21 +20,36 @@ namespace AstolfoBeanPlushie
             base.ModSetup();
 
             SetupFunction(Setup.OnLoad, Mod_Load);
+            SetupFunction(Setup.OnSave, Mod_OnSave);
         }
+
+        private GameObject _plushie;
 
         private void Mod_Load()
         {
             var assetBundle = AssetBundle.CreateFromMemoryImmediate(Resource1.astolfoplushie);
 
             var beanPlushie = assetBundle.LoadAsset<GameObject>("Astolfo");
-            var instance = GameObject.Instantiate(beanPlushie);
-            instance.AddComponent<Rigidbody>();
-            instance.MakePickable();
-            instance.name = "Astolfo Plushie(Clone)";
+            _plushie = GameObject.Instantiate(beanPlushie);
+            _plushie.AddComponent<Rigidbody>();
+            _plushie.MakePickable();
+            _plushie.name = "Astolfo Plushie(Clone)";
             var player = GameObject.Find("PLAYER");
-            instance.transform.position = player.transform.position;
+            _plushie.transform.position = player.transform.position;
+
+            if (SaveLoad.ValueExists(this, "plushiePos") && SaveLoad.ValueExists(this, "plushieRot"))
+            {
+                _plushie.transform.position = SaveLoad.ReadValue<Vector3>(this, "plushiePos");
+                _plushie.transform.rotation = SaveLoad.ReadValue<Quaternion>(this, "plushieRot");
+            }
 
             assetBundle.Unload(false);
+        }
+
+        private void Mod_OnSave()
+        {
+            SaveLoad.WriteValue<Vector3>(this, "plushiePos", _plushie.transform.position);
+            SaveLoad.WriteValue<Quaternion>(this, "plushieRot", _plushie.transform.rotation);
         }
     }
 }
