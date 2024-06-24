@@ -11,7 +11,7 @@ namespace AstolfoBeanPlushie
     {
         public override string ID => "AstolfoBeanPlushie";
 
-        public override string Version => "0.1";
+        public override string Version => "0.3";
 
         public override string Author => "アカツキ";
 
