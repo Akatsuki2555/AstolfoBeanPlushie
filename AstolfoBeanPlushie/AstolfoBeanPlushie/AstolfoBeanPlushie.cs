@@ -72,6 +72,8 @@ namespace AstolfoBeanPlushie
             _plushie.AddComponent<Rigidbody>();
             _plushie.MakePickable();
             _plushie.name = "Astolfo Plushie(Clone)";
+            _plushie.transform.position = pos;
+            _plushie.transform.rotation = rot;
             return _plushie;
         }
 
